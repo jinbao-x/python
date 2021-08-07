@@ -1,0 +1,30 @@
+将字符串转换为JSON格式
+$echo '{"job":"develop","name":"lihua","sex":"male"}' | python -m json.tool
+{
+	"job":"develop",
+	"name":"lihua",
+	"sex":"male"
+}
+
+
+
+pip安装
+安装python-pip软件包
+
+pip freeze > requirements.txt				#导出系系统已经安装的软件包列表
+pip install -r requirements.txt				#从requirements.txt文件中安装软件包
+pip download -d /root/pipdownload/ -r requirements.txt	#从requirements.txt文件中下载软件包并保存在指定路径下
+
+如果想要不使用默认的源，可以使用豆瓣源，或阿里源
+pip install -i https://pypi.douban.com/simple flask	#flask是要下载的软件包
+每次都指定镜像源的地址比较麻烦，所以修改pip的配置文件，需要在用户家目录创建.pip/pip.conf文件
+cat /root/.pip/pip.conf
+[global]
+index-url=https://pypi.douban.com/simple/
+
+想要不联网使用某个目录里的软件包本地安装的话
+pip install -no-index -f file://`pwd` -r requirements.txt
+
+
+
+

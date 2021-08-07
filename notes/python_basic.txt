@@ -1,0 +1,455 @@
+
+######判断结构
+if 条件1:
+	语句
+elif 条件2:
+	语句
+...
+else:
+	语句
+
+######判断的紧凑型结构
+count = 2
+count if count!=0 else "不存在"
+逻辑为：如果count的值不为0，则输出count值，否则输出不存在
+
+
+
+######条件的几种形式？
+TempStr[-1] in ['F','f']	判断末尾数字是不是F或f
+
+
+
+
+eval("x + 1")
+eval的作用是将输入的字符串变成python语句，并执行该语句
+num = eval(input("请输入一个整数："))
+
+
+
+######输入输出格式
+input("请输入要计算的数值：")
+print(value*2)
+
+
+注：python中的括号和数学运算中的括号一样，用来表示分组和优先级，不使用括号时，优先级按照算数优先级来确定
+
+
+######print按指定格式输出
+C1 = 10
+print("转换后的温度是{:.2f}".format(C1))
+转换后的温度是10.00C
+
+print()函数用槽格式和format()方法将变量和字符串结合到一起输出，其中大括号{}表示一个槽位置，这个括号中的内容由字符串后面紧跟的format()方法中的参数C填充。大括号{:.2f}中的内容表示变量C输出的格式，具体表示输出数值取两位小数值
+
+
+######循环
+循环保留字
+break用来跳出最内层for或while循环，脱离该循环后程序从循环代码后继续执行
+continue用来结束当前当次循环，即跳出循环体中下面尚未执行的语句，但不跳出当前循环
+continue与break之间最大的区别就是，continue语句只结束当次循环，而不终止整个循环的执行；而break语句则是结束最内层整个循环过程
+######循环的几种形式
+1、遍历循环
+for i in range(4)	循环4次
+	xxxxx
+	xxxx
+分为：
+for i in range(N):		循环N次
+for line in fi:			遍历文件fi的每一行
+for c in s:			遍历字符串s
+for item in ls:			遍历列表ls
+
+2、for的扩展模式
+for 循环变量 in 遍历结构：
+	语句
+else：
+	语句
+#此扩展模式，当for循环正常执行结束之后，程序会执行else语句中的内容，else语句只有在循环正常执行结束后才执行，后续会结合continue和break进一步理解
+
+3、当循环
+while 条件:
+	语句1
+else：
+	语句2
+#此当循环里，仍旧用到了扩展，else语句只在循环正常执行结束后才执行，因此可以在语句2中放置判断循环执行情况的语句
+
+
+
+
+
+
+示例：
+TempStr = input("请输入带有符号的温度值：")
+while TempStr[-1] not in ['N','n']:				#当输入的字符串末尾不是N或n时
+	if TempStr[-1] in ['F','f']:				#当输入的字符串末尾是F或f时
+		c = (eval(TempStr[]) - 32 )/1.8
+		print("转换后的温度是{:.2f}F".format(F))
+	elif
+		F...
+	else
+		p...
+	TempStr = input("请输入带有符号的温度值：")
+
+
+温度转换完整示例
+#e1.3TempConvert.py		不同尾缀的执行不同的换算操作
+def tempConvert(ValueStr):
+	if ValueStr[-1] in ['F','f']:
+		c = (eval(ValueStr[0:-1] - 32))/1.8
+		print ("转换后的温度是{:.2f}C".format(C))
+	elif ValueStr[-1] in ['C','c']:
+		F = 1.8*eval(ValueStr[0:-1]) + 32
+		print("转换后的温度是{:.2f}F".format(F))
+	else:
+		print("输入格式错误")
+TempStr = input("请输入带有符号的温度值：")
+tempConvert(Tempstr)
+
+
+
+
+######库的调用，汇总
+turtle库
+import turtle
+	turtle.setup(650,350,200,200)		坐标设置
+	turtle.penup()				起笔
+	turtle.pendown()			落笔
+	turtle.fd(-250)				向前
+	turtle.pensize(25)			粗细
+	turtle.pencolor("purple")		颜色
+	turtle.seth(-40)			改变画笔绘制方向，绝对角度
+	turtle.circle(radius,extent)		radius为半径，值为正则半径在小海龟左侧，extent为弧形角度
+	turtle.circle(40,80/2)
+------------
+random库
+import random
+	random.seed(a=None)		初始化随机数种子，默认值为当前系统时间
+	random.getstat()		获取随机数的种子
+	random.setstat(x)		重新赋值随机数的种子
+	random.random()			生成一个[0.0,1.0]之间的随即小数
+	random.randint(a,b)		生成一个[a,b]之间的整数
+	random.getrandbits(k)		生成一个k比特长度的随机整数
+	random.randrange(start,stop[,step])	生成一个[start,stop)之间以step为步数的随机整数
+	random.uniform(a,b)		生成一个[a,b]之间的随机小数
+	random.choice(seq)		从序列类型，例如列表中随机返回一个元素
+	random.shuffle(seq)		将序列类型中的元素随机排列，返回打乱后的序列
+	random.sample(pop,k)		从pop类型中随机选取k个元素，以列表类型返回
+#随机数种子(random.seed)在伪随机数生成器中用于生成伪随机数的初始数值。对于一个伪随机数生成器，从相同的随机数种子出发，可以得到相同的随机数序列。随机数种子通常由当前计算机状态确定，如当前的时间
+------------
+datetime库
+import datetime
+	datetime.date		日期表示类，可以表示年月日等
+	datetime.time		时间表示类，可以表示小时、分钟、秒、毫秒等
+	datetime.datetime	日期和时间的表示类，功能覆盖date和time类
+	datetime.timedelta	与时间间隔有关的类
+	datetime.tzinfo		与时区有关的信息表示类
+以上示例，小数点前是库，小数点后是类
+datetime类的使用方式是首先创建一个datetime对象，然后通过对象的方法和属性显示时间。创建datetime对象有3种方法：datetime.now()、datetime.utcnow()、datetime.datetime()
+如果使用的是import datetime的方式导入库，为了避免混淆，调用对象的方法的时候，相当于要这样使用：datetime.datetime.now()，其中第一个datetime代表库，第二个datetime代表对象，第三个now代表方法
+如果使用的是from datetime import *的方式，相当于从库里直接导入这个库中的所有对象，则下面可以直接采用
+对象.方法
+这样的方式使用
+---------- 
+time库
+import time
+	time.clock()
+
+
+
+
+
+######python的异常处理
+try:
+	语句0
+except	异常类型1:
+	语句1
+except	异常类型2:
+	语句2
+except	异常类型3:
+	语句3
+
+其中第1到第N个except语句都制定了异常类型，而最后一个不指定，意味着最后一个异常判定为处理所有其他异常，这个过程可以与if-elif-else对比记忆
+
+
+try和except保留字之外，异常语句还可以与else和finally保留字配合使用，语法格式如下
+try:
+	语句0
+except	异常类型1:
+	语句1
+else:
+	语句2
+finally:
+	语句3
+此处的else与for循环和while循环中的else一样，当try中的语句0正常执行结束且没有发生异常的时候，else中的语句2执行，可以看作是对try语句块正常执行后的一种追加处理。finally语句块则不同，无论try语句0是否发生异常，语句3都会执行，可以将一些收尾工作放在这里语句3，例如关闭、打开文件等
+------------
+python的异常相关概念
+异常是程序运行时发生错误的信号，产生一个异常，如果程序没有处理它，则会抛出该异常，程序运行也随之终止，在python中，错误触发的异常有下面这些
+1、语法错误
+语法错误的话，会过不了python解释器的语法检测
+2、逻辑错误
+代码逻辑有问题
+python在处理异常时，抛出的异常种类
+AttributeError		试图访问一个对象没有的属性，比如foo.x，但是foo没有属性x
+
+
+
+
+
+
+######def定义函数
+def 函数名 (参数列表):
+	函数体
+	return 返回值列表
+
+示例：
+def happy():
+	print("Happy birthday to you!")
+def happyB(name):
+	happy()
+	happy()
+	print("Happy birthday,dear {}!".format(name))
+	happy()
+happyB("Mike")
+print()		打印一个空行
+happyB("Lily")
+
+编程范式包括命令式编程、函数式编程、面向对象编程
+函数式编程主要思想是把程序过程尽量写成一系列函数调用，通过函数进一步提高封装级别，函数式编程通过使用一系列函数能够使代码编写更简洁、更易于理解，是中小规模软件项目中最常用的编程方式
+
+
+可以在定义函数的时候给参数一个默认的值，如果调用函数的时候没有给这个参数值，则会直接使用默认的值
+例：
+>>>def dup(str, times = 2)
+	print(str*times)
+>>>dup("knock~")
+knock~knock~
+>>>dup("knock~",4)
+knock~knock~knock~knock~
+
+#lamba函数？
+
+5.2节需要多次理解
+
+-->第三章：数据类型<--
+pow(2,100)
+计算2的100次方
+还可以嵌套使用
+pow(2,pow(1,15))
+
+科学计数法使用字母e或E作为幂的符号，10位基数
+如4.3e-3为0.0043
+
+高精度浮点运算用到decimal
+>>>import decimal
+>>>a=decimal.Decimal('3.141592653')
+>>>b=decimal.Decimal('1.234567898')
+>>>decimal.getcontext().prec=20
+>>>a+b
+
+字符串类型
+单引号字符串:'单引号表示，可以使用"双引号"作为字符串的一部分'
+双引号字符串:'双引号表示，可以使用'单引号'作为字符串的一部分'
+三引号字符串:'''三引号表示可以使用"双引号"
+		'单引号'
+		也可以换行
+		"""
+
+获取用户输入，输出“获取的内容”
+>>>name = input（"请输入名字："）
+>>>print（name）
+
+python字符串的区间访问方式
+[N:M]
+正向从0开始，反向从-1开始
+
+转移字符
+\n换行，光标移动到下行首行
+\\反斜杠
+\'单引号
+\"双引号
+\t制表符tab
+
+\a蜂鸣响铃
+\b回退，向后退一格
+\f换页
+\r回车，光标移动到本行行首
+\v垂直制表符
+\0NULL，空，什么都不做
+不过需要注意的是：
+IDLE开发环境不支持部分特殊控制字符，比如\b和\r，使用这些控制字符的程序需要编写代码保存为py文件，然后在命令下执行
+
+
+
+@@字符串操作符
+x+y		连接两个字符串x与y
+x*n		复制n次字符串x
+x in s		如果x是s的子串，返回true，否则返回false
+str[i]		索引，返回第i个字符
+str[N:M]	切片，返回索引的第N到第M的子串，其中不包含M，注意不包含M
+
+字符串处理的相关几个函数：
+len(x)		返回字符串x的长度，也可返回其他组合数据类型元素个数
+str(x)		返回任意类型x所对应的字符串形式
+chr(x)		返回unicode编码x对应的单字符
+ord(x)		返回单字符表示的unicode编码
+oct(x)		返回整数x对应八进制数的小写形式字符串
+hex(x)		返回整数x对应十六进制数的小写形式字符串
+
+示例代码
+#!/usr/bin/python2
+# -*- coding: UTF-8 -*-
+from __future__ import print_function
+code = raw_input("请输入明文：")
+for i in code:
+    if ord("a") <= ord(i) <= ord("z"):
+        print(chr(ord("a") + (ord(i) - ord("a") + 3)%26),end='')
+    else:
+        print(i,end='')
+
+
+python内置的字符串处理方法
+str.lower()			返回字符串str的副本，全部字符小写
+str.upper()			返回字符串str的副本，全部字符大写
+str.islower()			当str所有字符都是小写时，返回true，否则返回false
+str.isprintable()		当str所有字符都是可打印的，返回true，否则返回false
+str.isnumeric()			当str所有字符都是数字时，返回true，否则返回false
+str.isspace()			当str所有字符都是空格，返回true，否则返回false
+str.endswith(suffix[,start[,start[,end]])	str[start:end]以suffix结尾返回true，否则返回false
+str.startswith(prefix[,start[,end]])	str[start:end]以prefix开始返回true，否则返回false
+str.split(sep=None,maxsplit=-1)	返回一个列表，由str根据sep被分隔的部分构成
+str.count(sub[,start[,end]])	返回str[start:end]中count子串出现的次数
+str.replace(old,new[,count])	返回字符串str的副本，所有old子串都被替换为new，如果count给出，则前count次old出现被替换
+str.center(width[,fillchar])	字符串居中函数，详见函数定义
+str.strip([chars])		返回字符串str的副本，在其左侧和右侧去掉chars中列出的字符
+str,zfill(width)		返回字符串str的副本，长度为width，不足部分在左侧添0
+str.format()			返回字符串str的一种排版格式，3.6节详细介绍
+str.join(itertable)		返回一个新字符串，由组合数据类型（见第6章）interable变量的每个元素组成，元素间用str分隔
+
+
+
+
+字符串类型个格式化
+用于解决字符串和变量同时输出时的格式安排
+
+<模板字符串>.format(<逗号分隔的参数>)
+模板字符串是由一系列槽组成，用来控制修改字符串中嵌入值出现的位置，其基本思想是将format()方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中
+ 如果槽用大括号({})表示，如果大括号中没有·序号，则按照出现顺序替换
+如果输出结果需要输出{}的话，采用{{}}的方式
+
+口诀：填充对齐宽度，千分精度类型
+{}内的格式，数字开始，代表槽位，接着跟冒号，冒号之后就是口诀
+口诀详解：
+填充：用于填充的单个字符,如果写*就是用*填充多余空格，如果写H，就是用H填充多余空格
+对齐：<左对齐 >右对齐 ^居中对齐
+宽度：槽的设定输出宽度
+，
+千分：","数字的千位分隔符，适用于整数和浮点数
+精度："."浮点数小数部分的精度或字符串的最大输出长度
+类型：整数类型b(二进制),c(Unicode字符),d(十进制),o(八进制),x(十六进制),X(十六进制)
+浮点数类型c(小写字母e的指数形式),E(大写字母E的指数形式),f(标准浮点形式),%(浮点数的百分形式)
+
+示例：
+print("{:=^20}".format(a))
+print("{:,.2f}")	保留小数后两位，有千分位标识
+=为填充，^居中，20宽度
+
+
+为什么会有填充的概念呢？
+因为有了宽度，如果format()里的实际参数比控制标记里的设定宽度大，则会按照实际的值输出，如果format()里的实际参数比控制标记里的设定宽度小，则会按照设定的对齐方式对齐
+
+#!/usr/bin/python2
+# -*- coding: UTF-8 -*-
+import time
+scale = 10
+print("------执行开始------")
+for i in range(scale+1):
+    a, b = '**' * i,'..' * (scale - i)
+    c = (i*100)/10
+    print("{:^3.0f}%[{}->{}]" .format (c, a, b))
+    time.sleep(0.1)
+print("------执行结束------")
+#整体循环21次，从0循环到21
+
+#注意/是求商，即9/3=0
+#%是取余，即9%3=0
+
+注意此地方，(i/scale)*100并不能得到10、20、30...而是得到0、0、0...100
+这个得弄清楚
+这是因为/是取商，没有先*100的话，直接/scale会输出结果为0
+
+
+示例：多行动态刷新
+#!/usr/bin/python2
+import time
+from __future__ import print_function
+for i in range(101):
+    print("\r{:2}%".format(i),end='')
+    time.sleep(0.05)
+
+@@@range函数的使用
+range(101)是默认从0开始，一直到100，101不算
+如果写法是range(1,101)就是从1开始一直到100，101不算
+
+@@@range巧用,可以利用range循环出字符串的每个字母
+str = 'xyz'
+for i in range(len(x)):
+	printf(x[i])
+
+示例：带刷新的文本进度条
+使用time库中的time.clock()函数，一般多次出现，第一次调用时，计时开始
+同一程序中第二次及后续调用时返回与第一次调用时的时间差，单位为秒
+
+#!/usr/bin/python2
+# -*- coding: UTF-8 -*-
+import time
+from __future__ import print_function
+scale = 50
+print("执行开始".center(scale//2,'-'))
+t = time.clock()
+for i in range(scale+1):
+	a = '*' * i
+	b = (i * 100)/scale
+	c = '.' * (scale - i)
+	t -= time.clock()
+	print("\r{:^3.0f}%[{}->{}]{:.2f}s".format(b,a,c,-t),end='')
+	time.sleep(0.1)
+print("\n"+"执行结束".center(scale//2,'-'))
+
+
+注:.center是center函数，用来填充字符串，.center(参数1，参数2)
+第一个参数是字符宽度，包括已有的字符，第二个参数是填充的符号
+注：from __future__ import print_function必须在import time前边
+注：t -= time.clock()，t后边引用时需用-t
+
+
+
+看到3.7.3节
+
+
+
+
+
+
+
+
+
+
+开始使用python进行运维自动化
+from __future__ import print_function
+import sys
+for line in sys.stdin:
+    print(line, end="")
+
+然后就可以像shell脚本一样，通过标准输入给该程序输入内容
+cat /etc/passwd | python read_stdin.py
+python read_stdin.py < /etc/passwd
+python read_stdin.py -
+
+示例2
+from -__future__ import print_function
+import sys
+def get_content():
+	return sys.stdin.readlines()	#调用sys库中的stdin方法的readlines()函数
+print(get_content())	#调用get_content()函数，并打印
+
+

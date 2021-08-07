@@ -1,0 +1,8 @@
+1秒启动一个下载解释器
+python2中使用的方式是：
+python -m SimpleHTTPServer
+python3中使用的方式是：
+python -m http.server
+
+网络通的情况下，另外一台机器使用IP:8000的方式访问（端口为8000）
+

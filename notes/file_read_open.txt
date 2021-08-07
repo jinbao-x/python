@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+f = open('python6.py')
+print(f.read())
+f.close
+#等同于
+with open('python.py') as f:
+    print(f.read())
+#这样就能避免文件句柄泄露
+
+
+#open的模式
+f = open('python6.py','r')		#只读打开，文件不存在报异常
+f = open('python6.py','w')		#写模式，文件非空会被清空，文件不存在则创建
+f = open('python6.py','x')		#new file，文件存在报异常
+
+#三个读函数
+f.read()		#读取所有
+f.readline()	#一次读一行
+f.readlines()	#列表
+
+#两个写函数
+f.write('xxx')
+f.writelines(['xxx','yyy'])	#[]中表示列表
+除了使用这两个写函数对f进行操作之外，还可以直接使用print函数，相对方便一些，例如
+with open('python6.py','w') as f:
+	print(1,2,'hello,world',sep=","file=f)
+注意这里，sep才是真正的print出来的元素的分隔符，没有这个print出来的默认以空格分隔
+
+以上其实都是写文件
+如果修改或查看文件建议用遍历
+with open('python.py') as inf:
+	for line in inf:
+		print(line.upper())
+
+
+#案例：
+with open('data.txt') as inf,open('out.txt','w') as outf:
+	for line in inf:
+		outf.write(" ".join([word.capitalize() for word in line.split()]))
+		outf.write("\n")
+从data.txt文件读数据，处理完之后输出到out.txt文件
+#从上面例子中能学到一个很重要的内容，那就是：可以用以下方法处理每行的内容并写入
+outf.write(" ".join([word.capitalize() for word in line.split()]))
+
+
+
